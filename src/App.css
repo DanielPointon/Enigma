@@ -1,0 +1,37 @@
+.forwardPassLightUp {
+  color: blue !important;
+}
+
+.backwardPassLightUp {
+  color: red !important;
+}
+
+.borderRight {
+  background-color: white;
+  border-top: 2px solid black !important;
+  border-left: 2px solid black !important;
+  border-right: 2px solid black !important;
+}
+
+.borderLeft {
+  background-color: white;
+  border-bottom: 2px solid black !important;
+  border-left: 2px solid black !important;
+  border-right: 2px solid black !important;
+}
+
+* {
+  border-collapse: collapse;
+  font-family: "Spectral SC", cursive;
+}
+
+.td {
+  border-color: 2px solid blue;
+  text-align: center;
+  height: 20px !important;
+  width: 100px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 2em;
+  font-family: "Bungee", cursive !important;
+}
