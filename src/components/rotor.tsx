@@ -1,47 +1,42 @@
 import React, { Fragment } from "react";
+import { rotor, rotorHighlights, rowHighlights } from "../types/state";
 interface IProps {
-  rotor: any;
+  rotor: rotor;
   className: String;
   highlights: any;
 }
-export const Rotor: React.FC<IProps> = ({
-  rotor,
-  className,
-  highlights
-}) => {
+export const Rotor: React.FC<IProps> = ({ rotor, className, highlights }) => {
   const characterToElement = (
     borderClass: string,
-    highlights: any,
+    highlights: rowHighlights
   ) => (char: string, index: number) => {
-    const highlightClasses=Object.keys(highlights).filter((key)=>highlights[key].includes(index));
+    const forwardPassHighlight =
+      highlights.forwardPass.includes(index) && "forwardPassLightUp";
+    const backwardPassLightUp =
+      highlights.backwardPass.includes(index) && "backwardPassLightUp";
+
     //Class that adds a border once every two rotors, gives the impression everything is moving
     const bordered = (index + rotor.shift) % 2 === 0 && borderClass;
-    console.log(index, rotor.shift);
     return (
-      <td className={`td ${className} ${highlightClasses.join(' ')} ${bordered}`}>{char}</td>
+      <td
+        className={`td ${className} ${forwardPassHighlight} ${backwardPassLightUp} ${bordered}`}
+      >
+        {char}
+      </td>
     );
   };
+
   return (
     <Fragment>
       <tr>
         {rotor.inputRow
           .split("")
-          .map(
-            characterToElement(
-              "borderRight",
-              highlights.input
-            )
-          )}
+          .map(characterToElement("borderTop", highlights.inputRow))}
       </tr>
       <tr>
         {rotor.outputRow
           .split("")
-          .map(
-            characterToElement(
-              "borderLeft",
-              highlights.output
-            )
-          )}
+          .map(characterToElement("borderBottom", highlights.outputRow))}
       </tr>
     </Fragment>
   );

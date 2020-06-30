@@ -1,30 +1,15 @@
 import React, { Fragment } from "react";
 interface IProps {
-  row: any;
+  row: string;
   className: String;
-  // inputHighlight: number;
-  // ouputHighlight: number;
 }
-export const PlainRow: React.FC<IProps> = ({
-  row,
-  className,
-  // inputHighlight,
-  // ouputHighlight,
-}) => {
-  const characterToElement = (
-    // highlightIndex: number,
-    // highlightClass: string
-  ) => (char: string, index: number) => {
-    // const highlighted = index === highlightIndex && highlightClass;
+export const PlainRow: React.FC<IProps> = ({ row, className }) => {
+  const characterToElement = () => (char: string, index: number) => {
     return <td className={`td ${className}`}>{char}</td>;
   };
   return (
     <Fragment>
-      <tr>
-        {row
-          .split("")
-          .map(characterToElement())}
-      </tr>
+      <tr>{row.split("").map(characterToElement())}</tr>
     </Fragment>
   );
 };

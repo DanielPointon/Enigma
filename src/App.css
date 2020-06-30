@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+
 .forwardPassLightUp {
   color: blue !important;
 }
@@ -6,14 +8,14 @@
   color: red !important;
 }
 
-.borderRight {
+.borderTop {
   background-color: white;
   border-top: 2px solid black !important;
   border-left: 2px solid black !important;
   border-right: 2px solid black !important;
 }
 
-.borderLeft {
+.borderBottom {
   background-color: white;
   border-bottom: 2px solid black !important;
   border-left: 2px solid black !important;
@@ -33,5 +35,41 @@
   margin: 0 !important;
   padding: 0 !important;
   font-size: 2em;
+}
+
+* {
   font-family: "Bungee", cursive !important;
+}
+
+body {
+  background-color: black;
+}
+
+/*Key on lightboard*/
+.key {
+  font-size: 2em;
+  font-style: normal;
+  display: inline-block;
+  border-radius: 3px;
+  margin-right: 2px;
+  font-weight: bold;
+  border: 1px solid black;
+}
+
+/*These are the bootstrap alert backgrounds because I really like their colour scheme*/
+.rotorOne {
+  background-color: #dff0d8;
+}
+
+.rotorTwo {
+  background-color: #fcf8e3;
+}
+
+.rotorThree {
+  background-color: #f2dede;
+}
+
+.contrast{
+  background-color: black;
+  color: white;
 }
