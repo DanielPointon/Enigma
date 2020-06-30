@@ -21,7 +21,7 @@ export const Dials: React.FC<IProps> = ({ rotateRotor }) => {
           max="26"
           value={value}
           onChange={(event:any) => {
-            rotateRotor(index, (event.target.value - value + 26) % 26);
+            rotateRotor(index, event.target.value - value);
             dispatch({
               payload: { rotorIndex: index, value: event.target.value },
             });
