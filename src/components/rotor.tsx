@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { rotor, rotorHighlights, rowHighlights } from "../types/state";
+import { rotor, rowHighlights } from "../types/state";
 interface IProps {
   rotor: rotor;
   className: String;
@@ -20,6 +20,7 @@ export const Rotor: React.FC<IProps> = ({ rotor, className, highlights }) => {
     return (
       <td
         className={`td ${className} ${forwardPassHighlight} ${backwardPassLightUp} ${bordered}`}
+        key={`rotor-char-${char}`}
       >
         {char}
       </td>

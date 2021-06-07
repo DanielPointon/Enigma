@@ -52,7 +52,8 @@ export const encryptLetter: (input: string, machine: machine) => returnType = (
     inputKey: "inputRow" | "outputRow",
     outputKey: "inputRow" | "outputRow",
     passKey: "forwardPass" | "backwardPass",
-    initialState: passOutput
+    initialState: passOutput,
+    goingBackwards: Boolean,
   ) => {
     return rotors.reduce(
       (state: passOutput, rotor: rotor, rotorIndex: number): passOutput => {
@@ -69,7 +70,7 @@ export const encryptLetter: (input: string, machine: machine) => returnType = (
           rotorHighlights: state.rotorHighlights.map(
             (highlights: any, highlightIndex: number) => {
               //If we are on the highlight that corresponds to the current rotor
-              return highlightIndex == rotorIndex
+              return highlightIndex === (goingBackwards ? rotorIndex : rotors.length-rotorIndex-1)
                 ? {
                     ...highlights,
                     [outputKey]: {
@@ -103,7 +104,8 @@ export const encryptLetter: (input: string, machine: machine) => returnType = (
     "inputRow",
     "outputRow",
     "forwardPass",
-    initialState
+    initialState,
+    true
   );
   const reflectedResult = reflector(
     machine.reflector,
@@ -121,7 +123,8 @@ export const encryptLetter: (input: string, machine: machine) => returnType = (
     "outputRow",
     "inputRow",
     "backwardPass",
-    reflectedPass
+    reflectedPass,
+    false
   );
   return {
     result: String.fromCharCode(asciiA + backwardPass.charAlphabetPos),

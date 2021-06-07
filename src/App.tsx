@@ -68,6 +68,7 @@ function App() {
                   rotor={state.machine.rotors[index]}
                   className={rotorClasses[index]}
                   highlights={state.highlights[index]}
+                  key={`rotor-${index}`}
                 ></Rotor>
               );
             })}

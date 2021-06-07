@@ -26,6 +26,7 @@ export const Dials: React.FC<IProps> = ({ rotateRotor }) => {
               payload: { rotorIndex: index, value: event.target.value },
             });
           }}
+          key={`dial-${index}`}
         ></input>
       ))}
     </div>

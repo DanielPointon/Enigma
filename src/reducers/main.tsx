@@ -1,12 +1,13 @@
 import { state, rotor } from "../types/state";
 import { action } from "../types/action";
 import { rotors, alphabet, reflector } from "../config";
+import { encryptLetter } from "../machineLogic";
 
 export const noHighlights = {
   inputRow: { forwardPass: [], backwardPass: [] },
   outputRow: { forwardPass: [], backwardPass: [] },
 };
-export const initialState:state= {
+export const initialState: state = {
   machine: {
     rotors: rotors.map((rotorString: string) => {
       return { inputRow: rotorString, outputRow: alphabet, shift: 0 };
@@ -31,12 +32,12 @@ export const reducer = (state: state, action: action): state => {
     return rotors.map(
       //Iterate through rotors, shift the input and output rotor of rotor with specified index
       (rotor: rotor, index: number): rotor =>
-        index == rotorIndex
+        index === rotorIndex
           ? {
-              inputRow: rotateString(rotor.inputRow, shift),
-              outputRow: rotateString(rotor.outputRow, shift),
-              shift: rotor.shift + shift,
-            }
+            inputRow: rotateString(rotor.inputRow, shift),
+            outputRow: rotateString(rotor.outputRow, shift),
+            shift: rotor.shift + shift,
+          }
           : rotor
     );
   };
@@ -57,13 +58,21 @@ export const reducer = (state: state, action: action): state => {
     case "setHighlights":
       return { ...state, highlights: action.payload.highlights };
     case "addLetter":
+      const newMachine = {
+        ...state.machine,
+        //Rotate first rotor after every letter that's added
+        rotors: rotateRotor(state.machine.rotors, 0, 1),
+      }
+      
+      const encryptionResult = encryptLetter(action.payload.inputLetter, newMachine);
+
       return {
         ...state,
         plaintext: state.plaintext + action.payload.inputLetter,
-        ciphertext: state.ciphertext + action.payload.encryptedLetter,
-        highlights: action.payload.highlights,
+        ciphertext: state.ciphertext + encryptionResult.result,
+        highlights: encryptionResult.highlights,
         machine: {
-          ...state.machine,
+          ...newMachine,
           //Rotate first rotor after every letter that's added
           rotors: rotateRotor(state.machine.rotors, 0, 1),
         },

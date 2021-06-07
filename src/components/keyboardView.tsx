@@ -13,25 +13,27 @@ export const KeyboardView: React.FC<IProps> = ({
   onMouseLeave,
   onClick,
 }) => (
-  <div id="keyboard">
-    <table style={{ textAlign: "center" }}>
-      {keyboardRows.map((row) => (
-        <tr>
-          {row.split("").map((letter) => (
-            <td
-              //Highlight the current letter on the lightboard
-              className={`well well-sm key ${
-                letter === highlightedLetter && "contrast"
-              }`}
-              onMouseEnter={() => onMouseEnter && onMouseEnter(letter)}
-              onMouseLeave={() => onMouseLeave && onMouseLeave(letter)}
-              onClick={() => onClick && onClick(letter)}
-            >
-              {letter}
-            </td>
+    <div id="keyboard">
+      <table style={{ textAlign: "center" }}>
+        <tbody>
+          {keyboardRows.map((row) => (
+            <tr key={`letter-row-${row}`}>
+              {row.split("").map((letter) => (
+                <td
+                  //Highlight the current letter on the lightboard
+                  className={`well well-sm key ${letter === highlightedLetter && "contrast"
+                    }`}
+                  onMouseEnter={() => onMouseEnter && onMouseEnter(letter)}
+                  onMouseLeave={() => onMouseLeave && onMouseLeave(letter)}
+                  onClick={() => onClick && onClick(letter)}
+                  key={`letter-${letter}`}
+                >
+                  {letter}
+                </td>
+              ))}
+            </tr>
           ))}
-        </tr>
-      ))}
-    </table>
-  </div>
-);
+        </tbody>
+      </table>
+    </div>
+  );
